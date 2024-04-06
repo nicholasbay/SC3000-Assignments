@@ -42,6 +42,7 @@ succession(Son) :-
         son_of(Son, Monarch),
         son_of(OtherSon, Monarch),
         not(older_sibling(OtherSon, Son)),
+        Son \= OtherSon
     ).
 
 succession(Daughter) :-
