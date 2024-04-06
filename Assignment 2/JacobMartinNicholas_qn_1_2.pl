@@ -16,24 +16,24 @@ steal(stevey, galactica_s3, sumsum).	% 'stevey' steals 'galactica_s3' from 'sums
 
 
 /* Relations */
-competitor(X,Y) :-						% Defines the relation: 'X' is a competitor of 'Y'
-	competitor(Y,X),					% Inversely, 'Y' is a competitor of 'X'
-	atom(X),							% Ensure 'X' is an atom (company name)
-	X\=Y.								% Ensure 'X' and 'Y' are different
+competitor(CompanyX, CompanyY) :-		% Defines the relation: 'CompanyX' is a competitor of 'CompanyY'
+	competitor(CompanyY, CompanyX),		% Inversely, 'CompanyY' is a competitor of 'CompanyX'
+	atom(CompanyX),						% Ensure 'CompanyX' is an atom (company name)
+	CompanyX \= CompanyY.				% Ensure 'CompanyX' and 'Y' are different
 
-rival(X,Y) :-							% Defines the relation: 'X' is a rival of 'Y'
-	competitor(X,Y),					% 'X' is a competitor of 'Y'
-	X\=Y.								% Ensure 'X' and 'Y' are different
+rival(CompanyX,CompanyY) :-					% Defines the relation: 'CompanyX' is a rival of 'CompanyY'
+	competitor(CompanyX, CompanyY),		% 'CompanyX' is a competitor of 'CompanyY'
+	CompanyX \= CompanyY.				% Ensure 'CompanyX' and 'CompanyY' are different
 
-business(X) :-							% Defines the relation: 'X' is a business
-	smartphonetechnology(X).			% 'X' is involved in smartphone technology
+business(Product) :-					% Defines the relation: 'Product' is part of a business
+	smartphonetechnology(X).			% 'Product' has smartphone technology
 
-smartphonetechnology(X) :- 				% Defines the relation: 'X' is involved in smartphone technology
-	develop(_,X).						% 'X' is developed by some company
+smartphonetechnology(Product) :- 		% Defines the relation: 'Product' has smartphone technology
+	develop(_, Product).				% 'Product' is developed by some company
 
-unethical(X) :-							% Defines the relation: 'X' is unethical
-	boss(X,Y),							% 'X' is a boss of 'Y'
-	rival(Y,Z),							% 'Y' is a competitor of 'Z'
-	Y\=Z,								% Ensure 'Y' and 'Z' are different companies
-	steal(X,A,Z),						% 'A' steals product 'A' from 'Z'
-	business(A).						% 'A' is a business (involved in smartphone technology)
+unethical(Person) :-					% Defines the relation: 'Person' is unethical
+	boss(Person, CompanyX),				% 'CompanyX' is a boss of 'CompanyY'
+	rival(CompanyX, CompanyY),			% 'CompanyX' is a rival of 'CompanyY'
+	CompanyX \= CompanyY,				% Ensure 'CompanyX' and 'CompanyY' are different companies
+	steal(Person, Product, CompanyY),	% 'Person' steals 'Product' from 'CompanyY'
+	business(Product).					% 'Product' is part of a business
