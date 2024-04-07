@@ -3,8 +3,8 @@
 
 /* Constants */
 queen_elizabeth.                                % Person named 'queen_elizabeth'
-prince_charles.                                 % Person named 'prince_charles'
-prince_andrew.                                  % Person named 'prince_andrew'
+prince_andrew.                                 % Person named 'prince_andrew'
+prince_charles.                                  % Person named 'prince_charles'
 prince_edward.                                  % Person named 'prince_edward'
 princess_ann.                                   % Person named 'princess_ann'
 
@@ -36,21 +36,19 @@ older_sibling(prince_andrew, prince_edward).    % 'prince_andrew' is an older si
 /* Relations */
 % TODO: Convert the following relations into one that generates a list of successors
 % Error, returns true for succession(prince_andrew)
-succession(Son) :-
+succession_line(Child) :-
     monarch(Monarch),
-    (
-        son_of(Son, Monarch),
-        son_of(OtherSon, Monarch),
-        not(older_sibling(OtherSon, Son)),
-        Son \= OtherSon
+    (   son_of(Child,Monarch);
+        daughter_of(Child,Monarch)
     ).
 
-succession(Daughter) :-
+
+/*succession(Daughter) :-
     monarch(Monarch),
     not(son_of(_, Monarch)),
     (
         daughter_of(Daughter, Monarch),
-        daughter_of(OtherDaughter, Monarch),
-        not(older_sibling(OtherDaughter, Daughter)),
-        Daughter \= OtherDaughter
-    ).
+        %daughter_of(OtherDaughter, Monarch),
+        not(older_sibling(daughter_of(X,Monarch), Daughter))
+        %Daughter \= OtherDaughter
+    ).*/
