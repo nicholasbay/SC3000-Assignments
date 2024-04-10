@@ -1,4 +1,4 @@
-/* Knowledge Base for Exercise 2 Part 1 */
+/* Knowledge Base for Exercise 2 Part 2 */
 
 
 /* Constants */
@@ -33,17 +33,6 @@ older_sibling(prince_andrew, prince_edward).    % 'prince_andrew' is an older si
 
 
 /* Relations */
-son_of(Child, Parent) :-
-    child_of(Child, Parent),                    % 'Child' is a child of 'Parent'
-    male(Child).                                % 'Child' is a male
-
-daughter_of(Child, Parent) :-
-    child_of(Child, Parent),                    % 'Child' is a child of 'Parent'
-    female(Child).                              % 'Child' is a female
-
 succession_line(Child) :-
     monarch(Monarch),
-    (
-        son_of(Child, Monarch);
-        daughter_of(Child, Monarch)
-    ).
+    child_of(Child, Monarch).                   % 'Child' is a child of 'Monarch'

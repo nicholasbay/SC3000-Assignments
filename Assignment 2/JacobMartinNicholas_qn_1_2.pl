@@ -1,4 +1,4 @@
-/* Knowledge Base for Exercise 1 */
+/* Knowledge Base for Exercise 1 Part 2 */
 
 
 /* Constants */
